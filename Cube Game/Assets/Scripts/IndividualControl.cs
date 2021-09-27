@@ -12,7 +12,6 @@ public class IndividualControl : MonoBehaviour
     public float lerpDuration = 1000f;
     public int MouseCount = 0;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -38,26 +37,26 @@ public class IndividualControl : MonoBehaviour
     void OnMouseDown()
     {
         MouseActive = true;
+        //Adds to counter to control rotation of cube
         MouseCount = MouseCount + 1;
     }
-
-    void OnMouseUp()
-    {
-        MouseActive = false;
-    }
+      
     IEnumerator RotateCubes()
     {
-               
+              
         float timeElapsed = 0;
-                
+        
+        //Cube will rotate over time 
         while (timeElapsed < lerpDuration)
         {
+            //Cube will rotate if the MouseCounter is odd. 
             if (MouseCount % 2 == 1)
             {
                 this.transform.Rotate(Vector3.up * (RotationSpeed+10f) * Time.deltaTime);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
+            //Cube will stop rotating if clicked again, when the MouseCounter is even
             if (MouseCount % 2 == 0)
             {
                 this.transform.Rotate(0,0,0);
